@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <input id="display" type="text">
+        <script>
+            var input = document.getElementById("display");
+            input.onkeypress = character;
+            function character(event){
+                
+                var k = event.keyCode;
+                return((k>=65 && k<=90) || (k==13) || (k==8) || (k>=97 && k<=122) || (k==32) || (k>48 && k < 57));
+            }
+
+        </script>
+    </body>
+</html>
