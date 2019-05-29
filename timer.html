@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <style>
+            body{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            #output{
+                font-size: 150px;
+                color: beige;
+                background: #f42e0b;
+                box-sizing: content-box;
+                height: 200px;
+                width: 600px;
+                text-align: center;
+                border: 1px solid #f42e0b;
+                border-radius: 4px;
+            }
+            #start{
+                width: 200px;
+                height: 60px;
+                background-color: #0bd1f4;
+                font-size: 40px;
+                color: beige;
+                margin-right: 115px;
+            }
+            #stop{
+                width: 200px;
+                height: 60px;
+                background-color: #0bd1f4;
+                font-size: 40px;
+                color: beige;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="output"></div>
+        <br>
+        <div id="controls">
+            <button id="start" onclick="start()">Start</button>
+            <button id="stop" onclick="reset()">Stop</button>
+        </div>
+        <script>
+            var time = 0;
+            var flag = 0;
+            function start(){
+                if(flag == 0){
+                    flag=1;
+                    increment();
+                    document.getElementById("start").innerHTML = "Pause";
+                }
+                else{
+                    flag = 0;
+                    document.getElementById("start").innerHTML = "Resume";
+                }
+
+            }
+            function reset(){
+                flag=0;
+                time=0;
+                document.getElementById("start").innerHTML = "Start";
+                document.getElementById("output").innerHTML = "00:00:00";
+            }
+            function increment(){
+                if(flag == 1){
+                setTimeout(function(){
+                    time++;
+                    var min = Math.floor(time/600);
+                    var sec = Math.floor(time/10);
+                    var tenths = time % 10;
+                    var hour = Math.floor(time/36000);
+                    if(min < 10){
+                        min = "0" + min;
+                    }
+                    if(sec < 10){
+                        sec = "0" + sec;
+                    }
+                    if(sec > 60){
+                        sec = sec%60;
+                        if(sec < 10){
+                        sec = "0" + sec;
+                    }
+                    }
+                    if(min > 60){
+                        min = min%60;
+                        if(min < 10){
+                        min = "0" + min;
+                    }
+                    }
+                    if(hour < 10){
+                        hour = "0" + hour;
+                    }
+                    document.getElementById("output").innerHTML = hour + ":" + min + ":" + sec; 
+                    increment();
+                }, 100);
+                }
+            }
+        </script>
+    </body>
+</html>
